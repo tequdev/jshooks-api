@@ -1,4 +1,27 @@
-import { KEYLET_ACCOUNT } from '../keylets'
+import {
+  KEYLET_ACCOUNT,
+  KEYLET_AMENDMENTS,
+  KEYLET_CHECK,
+  KEYLET_CHILD,
+  KEYLET_DEPOSIT_PREAUTH,
+  KEYLET_EMITTED_DIR,
+  KEYLET_EMITTED_TXN,
+  KEYLET_ESCROW,
+  KEYLET_FEES,
+  KEYLET_HOOK,
+  KEYLET_HOOK_STATE,
+  KEYLET_LINE,
+  KEYLET_NEGATIVE_UNL,
+  KEYLET_NFT_OFFER,
+  KEYLET_OFFER,
+  KEYLET_OWNER_DIR,
+  KEYLET_PAGE,
+  KEYLET_PAYCHAN,
+  KEYLET_QUALITY,
+  KEYLET_SIGNERS,
+  KEYLET_SKIP,
+  KEYLET_UNCHECKED,
+} from '../keylets'
 import type { Transaction } from '@transia/xahau-models'
 import {
   SUCCESS,
@@ -240,7 +263,7 @@ declare global {
    */
   // KEYLET_HOOK_STATE
   function util_keylet(
-    keylet_type: KEYLET_HOOK_STATE,
+    keylet_type: typeof KEYLET_HOOK_STATE,
     accountid: ByteArray | HexString,
     statekey: ByteArray | HexString,
     namespace: ByteArray | HexString
@@ -248,66 +271,73 @@ declare global {
   // KEYLET_AMENDMENTS, KEYLET_FEES, KEYLET_NEGATIVE_UNL, KEYLET_EMITTED_DIR
   function util_keylet(
     keylet_type:
-      | KEYLET_AMENDMENTS
-      | KEYLET_FEES
-      | KEYLET_NEGATIVE_UNL
-      | KEYLET_EMITTED_DIR
+      | typeof KEYLET_AMENDMENTS
+      | typeof KEYLET_FEES
+      | typeof KEYLET_NEGATIVE_UNL
+      | typeof KEYLET_EMITTED_DIR
   ): ErrorCode | ByteArray
   // KEYLET_SKIP
   function util_keylet(
-    keylet_type: KEYLET_SKIP,
+    keylet_type: typeof KEYLET_SKIP,
     ledgerIndex?: number
   ): ErrorCode | ByteArray
   // KEYLET_LINE
   function util_keylet(
-    keylet_type: KEYLET_LINE,
+    keylet_type: typeof KEYLET_LINE,
     highaccountid: ByteArray | HexString,
     lowaccountid: ByteArray | HexString,
     currency: ByteArray | HexString
   ): ErrorCode | ByteArray
   // KEYLET_QUALITY
   function util_keylet(
-    keylet_type: KEYLET_QUALITY,
+    keylet_type: typeof KEYLET_QUALITY,
     keylet: ByteArray | HexString,
     high32bits: ByteArray | HexString,
     low32bits: ByteArray | HexString
   ): ErrorCode | ByteArray
   // KEYLET_DEPOSIT_PREAUTH
   function util_keylet(
-    keylet_type: KEYLET_DEPOSIT_PREAUTH,
+    keylet_type: typeof KEYLET_DEPOSIT_PREAUTH,
     owner: ByteArray | HexString,
     preauthorized: ByteArray | HexString
   ): ErrorCode | ByteArray
   // KEYLET_UNCHECKED, KEYLET_CHILD, KEYLET_EMITTED_TXN
   function util_keylet(
-    keylet_type: KEYLET_UNCHECKED | KEYLET_CHILD | KEYLET_EMITTED_TXN,
+    keylet_type:
+      | typeof KEYLET_UNCHECKED
+      | typeof KEYLET_CHILD
+      | typeof KEYLET_EMITTED_TXN,
     key: ByteArray | HexString
   ): ErrorCode | ByteArray
   // KEYLET_OWNER_DIR, KEYLET_SIGNERS, KEYLET_ACCOUNT, KEYLET_HOOK
   function util_keylet(
     keylet_type:
-      | KEYLET_OWNER_DIR
-      | KEYLET_SIGNERS
-      | KEYLET_ACCOUNT
-      | KEYLET_HOOK,
+      | typeof KEYLET_OWNER_DIR
+      | typeof KEYLET_SIGNERS
+      | typeof KEYLET_ACCOUNT
+      | typeof KEYLET_HOOK,
     accountid: ByteArray | HexString
   ): ErrorCode | ByteArray
   // KEYLET_PAGE
   function util_keylet(
-    keylet_type: KEYLET_PAGE,
+    keylet_type: typeof KEYLET_PAGE,
     key: ByteArray | HexString,
     high32bits: ByteArray | HexString,
     low32bits: ByteArray | HexString
   ): ErrorCode | ByteArray
   // KEYLET_OFFER, KEYLET_CHECK, KEYLET_ESCROW, KEYLET_NFT_OFFER
   function util_keylet(
-    keylet_type: KEYLET_OFFER | KEYLET_CHECK | KEYLET_ESCROW | KEYLET_NFT_OFFER,
+    keylet_type:
+      | typeof KEYLET_OFFER
+      | typeof KEYLET_CHECK
+      | typeof KEYLET_ESCROW
+      | typeof KEYLET_NFT_OFFER,
     accountid: ByteArray | HexString,
     sequence_or_key: ByteArray | HexString | number
   ): ErrorCode | ByteArray
   // KEYLET_PAYCHAN
   function util_keylet(
-    keylet_type: KEYLET_PAYCHAN,
+    keylet_type: typeof KEYLET_PAYCHAN,
     src_accountid: ByteArray | HexString,
     dst_accountid: ByteArray | HexString
   ): ErrorCode | ByteArray
