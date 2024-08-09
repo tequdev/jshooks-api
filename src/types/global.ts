@@ -1,4 +1,4 @@
-import { KEYLET_ACCOUNT } from './../keylets'
+import { KEYLET_ACCOUNT } from '../keylets'
 import type { Transaction } from '@transia/xahau-models'
 import {
   SUCCESS,
@@ -47,7 +47,7 @@ import {
   MEM_OVERLAP,
   TOO_MANY_STATE_MODIFICATIONS,
   TOO_MANY_NAMESPACES,
-} from '../error.ts'
+} from '../error'
 
 export type ErrorCode =
   | typeof SUCCESS
