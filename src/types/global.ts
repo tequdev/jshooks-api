@@ -1,4 +1,4 @@
-import {
+import type {
   KEYLET_ACCOUNT,
   KEYLET_AMENDMENTS,
   KEYLET_CHECK,
@@ -23,7 +23,7 @@ import {
   KEYLET_UNCHECKED,
 } from '../keylets'
 import type { Transaction } from '@transia/xahau-models'
-import {
+import type {
   SUCCESS,
   OUT_OF_BOUNDS,
   INTERNAL_ERROR,
