@@ -134,7 +134,11 @@ declare global {
    * @param hex     Should it log formatted in HEX?
    * @returns       int64_t, value is 0 if successful, If negative, an error: OUT_OF_BOUNDS
    */
-  function trace(message: string | null, data: any, hex: boolean): ErrorCode
+  function trace(
+    message: string | null,
+    data: any,
+    hex: boolean | 0 | 1
+  ): ErrorCode
 
   /********************************************************************************************************************* */
 
