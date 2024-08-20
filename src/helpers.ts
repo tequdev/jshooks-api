@@ -150,7 +150,7 @@ export const uint64FromBigInt = (value: bigint) => {
 
 export const uint64ToBigInt = (value: number[]) => {
   const view = new DataView(new Uint8Array(value).buffer)
-  return Number(view.getBigUint64(0, true))
+  return Number(view.getBigUint64(0))
 }
 
 export function arrayEqual<T>(arr1: T[], arr2: T[]): boolean {
