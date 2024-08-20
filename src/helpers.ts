@@ -110,7 +110,7 @@ export const uint8ToNumber = (value: number[]) => {
 export const uint16FromNumber = (value: number) => {
   if (value < 0 || 0xffff < value)
     rollback('uint16FromNumber: value out of range', -1)
-  return [value & 0xff, (value >> 8) & 0xff]
+  return [(value >> 8) & 0xff, value & 0xff]
 }
 export const uint16ToNumber = (value: number[]) => {
   const view = new DataView(new Uint8Array(value).buffer)
@@ -121,10 +121,10 @@ export const uint32FromNumber = (value: number) => {
   if (value < 0 || 0xffffffff < value)
     rollback('uint32FromNumber: value out of range', -1)
   return [
-    value & 0xff,
-    (value >> 8) & 0xff,
-    (value >> 16) & 0xff,
     (value >> 24) & 0xff,
+    (value >> 16) & 0xff,
+    (value >> 8) & 0xff,
+    value & 0xff,
   ]
 }
 
@@ -137,14 +137,14 @@ export const uint64FromBigInt = (value: bigint) => {
   if (value < 0n || 0xffffffffffffffffn < value)
     rollback('uint64FromBigInt: value out of range', -1)
   return [
-    Number(value & 0xffn),
-    Number((value >> 8n) & 0xffn),
-    Number((value >> 16n) & 0xffn),
-    Number((value >> 24n) & 0xffn),
-    Number((value >> 32n) & 0xffn),
-    Number((value >> 40n) & 0xffn),
-    Number((value >> 48n) & 0xffn),
     Number((value >> 56n) & 0xffn),
+    Number((value >> 48n) & 0xffn),
+    Number((value >> 40n) & 0xffn),
+    Number((value >> 32n) & 0xffn),
+    Number((value >> 24n) & 0xffn),
+    Number((value >> 16n) & 0xffn),
+    Number((value >> 8n) & 0xffn),
+    Number(value & 0xffn),
   ]
 }
 
