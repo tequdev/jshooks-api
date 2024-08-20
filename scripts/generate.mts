@@ -24,10 +24,15 @@ const tts = txFormats
 // tfs.ts
 const tfs = txFlags
   .match(/enum (.+?)Flags : (std::)?uint32_t \{(.+?)\}/gims)!
-  .map((t) =>
-    t.replace(/(^)/g, '$1export const ')
-      .replace(/:.*uint32_t/g, '')
-      .replace(/ {4}/g, '  ')
+  .map(
+    (t) => {
+      const flagGroup =/enum (.*?) :.*?{/g.exec(t)![1]
+      return t
+        .replace(/(.*{)|(}.*)|(    )|(\n)/g, '')
+        .replace(/,/g, '\n')
+        .replace(/(^|\n)(.+?)(\n)/gims, '$1export const $2$3')
+        .replace(/(export const )(.*?)( =)/g, `/** ${flagGroup}.$2 */\n$1$2$3`)
+    }
   ).join('\n')
 
 // keylets.ts
