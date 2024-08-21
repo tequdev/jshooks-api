@@ -83,6 +83,7 @@ const sfcodes = sfieldcpp
 
 writeFileSync('src/tts.ts', tts)
 writeFileSync('src/tfs.ts', tfs)
+writeFileSync('src/keylets.ts', keylets)
 writeFileSync('src/error.ts', error)
 writeFileSync('src/sfcodes.ts', sfcodes)
 
