@@ -169,12 +169,27 @@ export const encodeJson = (data: any) => {
     .join('')
 }
 
+export function decodeJson(a: number[]): Record<string, any> {
+  return JSON.parse(decodeArray(a))
+}
+
 export function encodeString(v: string): string {
   let s = ''
   for (let i = 0; i < v.length; i++) {
     s += v.charCodeAt(i).toString(16).padStart(2, '0')
   }
   return s.toUpperCase()
+}
+
+export function decodeString(a: number[] | string): string {
+  let s = ''
+  if (typeof a === 'string') {
+    a = hex2buf(a)
+  }
+  for (let i = 0; i < a.length; i++) {
+    s += String.fromCharCode(Number(a[i]))
+  }
+  return s
 }
 
 export const encodeArray = (a: number[]) => {
@@ -184,17 +199,12 @@ export const encodeArray = (a: number[]) => {
     .toUpperCase()
 }
 
-export const decodeString = decodeArray
 export function decodeArray(a: number[] | string): string {
   let s = ''
   for (let i = 0; i < a.length; i++) {
     s += String.fromCharCode(Number(a[i]))
   }
   return s
-}
-
-export function decodeJson(a: number[]): Record<string, any> {
-  return JSON.parse(decodeArray(a))
 }
 
 export function readFrom(array: number[], startIndex: number, offset: number) {
