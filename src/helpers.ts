@@ -357,34 +357,22 @@ export const decodeBuffer = <const T extends readonly FieldType[]>(
 
     switch (type) {
       case 'uint8': {
-        const value = uint8ToNumber(buffer.slice(offset, offset + 1))
-        offset += 1
-        return value
+        return uint8ToNumber(buffer.slice(offset, (offset += 1)))
       }
       case 'uint16': {
-        const value = uint16ToNumber(buffer.slice(offset, offset + 2))
-        offset += 2
-        return value
+        return uint16ToNumber(buffer.slice(offset, (offset += 2)))
       }
       case 'uint32': {
-        const value = uint32ToNumber(buffer.slice(offset, offset + 4))
-        offset += 4
-        return value
+        return uint32ToNumber(buffer.slice(offset, (offset += 4)))
       }
       case 'uint64': {
-        const value = uint64ToBigInt(buffer.slice(offset, offset + 8))
-        offset += 8
-        return value
+        return uint64ToBigInt(buffer.slice(offset, (offset += 8)))
       }
       case 'account': {
-        const value = buffer.slice(offset, offset + 20)
-        offset += 20
-        return value
+        return buffer.slice(offset, (offset += 20))
       }
       case 'hash256': {
-        const value = buffer.slice(offset, offset + 32)
-        offset += 32
-        return value
+        return buffer.slice(offset, (offset += 32))
       }
       default:
         throw new Error('Invalid type')
