@@ -320,13 +320,14 @@ export const iouBalance = (
   return float_int(slot_float(slotno) as unknown as bigint, 0, 1)
 }
 
-type FieldType =
+export type FieldType =
   | 'uint8'
   | 'uint16'
   | 'uint32'
   | 'uint64'
   | 'account'
   | 'hash256'
+  | `char${number}`
 
 type FieldTypeToValue<T extends FieldType> = T extends 'uint8'
   ? number
@@ -340,6 +341,8 @@ type FieldTypeToValue<T extends FieldType> = T extends 'uint8'
   ? number[]
   : T extends 'hash256'
   ? number[]
+  : T extends `char${number}`
+  ? string
   : never
 
 type FieldTypeToValues<T extends FieldType[]> = {
@@ -376,6 +379,12 @@ export const encodeBuffer = <const T extends readonly FieldType[]>(
         return v as number[]
       }
       default:
+        if (t.startsWith('char')) {
+          const len = parseInt(t.slice(4))
+          if ((v as string).length !== len)
+            throw new Error(`Invalid length for ${t} type`)
+          return hex2buf(encodeString(v as string))
+        }
         throw new Error('Invalid type')
     }
   })
@@ -410,6 +419,10 @@ export const decodeBuffer = <const T extends readonly FieldType[]>(
         return buffer.slice(offset, (offset += 32))
       }
       default:
+        if (type.startsWith('char')) {
+          const len = parseInt(type.slice(4))
+          return decodeString(buffer.slice(offset, (offset += len)))
+        }
         throw new Error('Invalid type')
     }
   }) as FieldTypeToValues<Mutable<T>>
